@@ -1,24 +1,16 @@
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import Footer from "../components/Footer";
 export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Create electronics blog | Home</title>
+        <link rel="icon" href="/ic.png" />
       </Head>
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
+        <Image src="/ic_1.png" width={256} height={256} />
         <div className={styles.grid}>
           <Link href="/about">
             <a className={styles.card}>
