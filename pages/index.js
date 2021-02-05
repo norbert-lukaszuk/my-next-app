@@ -10,7 +10,7 @@ export default function Home() {
         <link rel="icon" href="/ic.png" />
       </Head>
       <main className={styles.main}>
-        <Image src="/ic_1.png" width={256} height={256} />
+        <Image src="/ic_1.png" width={128} height={128} />
         <div className={styles.grid}>
           <Link href="/about">
             <a className={styles.card}>
