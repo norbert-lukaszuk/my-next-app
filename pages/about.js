@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-function about() {
+function About() {
   return (
     <>
       <Head>
@@ -22,4 +22,4 @@ function about() {
   );
 }
 
-export default about;
+export default About;

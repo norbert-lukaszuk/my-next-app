@@ -11,6 +11,23 @@
   border-radius: 10%;
   border: 2px solid black;
 }
+.single {
+  padding: 2px 16px;
+  background: #fff;
+  /* display: block; */
+  width: 100%;
+  margin: 20px 10px;
+  border-left: 8px solid #fff;
+}
+.single:hover {
+  border-left: 8px solid #4979ff;
+}
+.projects {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
 .main {
   padding: 0;
   flex: 1;
