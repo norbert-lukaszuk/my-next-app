@@ -5,7 +5,7 @@ import style from "../../styles/Home.module.css";
 import Link from "next/link";
 
 export const getStaticProps = async () => {
-  const resp = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const resp = await fetch("https://jsonplaceholder.typicode.com/users");
   const data = await resp.json();
   return { props: { projects: data } };
 };
@@ -25,7 +25,7 @@ const Projects = ({ projects }) => {
         {projects.map((project) => (
           <Link key={project.id} href={"/projects/" + project.id}>
             <a className={style.single}>
-              <h3>{project.title}</h3>
+              <h3>{project.name}</h3>
             </a>
           </Link>
         ))}
