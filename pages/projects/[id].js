@@ -14,9 +14,9 @@ export const getStaticPaths = async () => {
   console.log(paths);
   return { paths: paths, fallback: false };
 };
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async (context) => {
   const resp = await fetch(
-    `https://jsonplaceholder.typicode.com/users/${params.id}`
+    `https://jsonplaceholder.typicode.com/users/${context.params.id}`
   );
   const data = await resp.json();
   return { props: { projects: data } };
@@ -29,6 +29,7 @@ const Project = ({ projects }) => {
         <link rel="icon" href="/ic.png" />
       </Head>
       <h2>{projects.name}</h2>
+      <h2>{projects.username}</h2>
       <h3>{projects.email}</h3>
     </div>
   );
