@@ -11,7 +11,7 @@ export const getStaticProps = async () => {
 };
 
 const Projects = ({ projects }) => {
-  console.log(projects);
+  // console.log(projects);
   return (
     <div>
       <Head>
