@@ -5,6 +5,7 @@ import style from "../../styles/Home.module.css";
 import Link from "next/link";
 import fire from "../../config/fire-config";
 import { useState, useEffect } from "react";
+
 export const getStaticProps = async () => {
   const resp = await fetch("https://jsonplaceholder.typicode.com/users");
   const data = await resp.json();
@@ -36,10 +37,10 @@ const Projects = ({ projects }) => {
       <main className={style.main}>
         <Image src="/ic_1.png" width={128} height={128} />
         <h1>My projects</h1>
-        {projects.map((project) => (
-          <Link key={project.id} href={"/projects/" + project.id}>
+        {blogs.map((blog) => (
+          <Link key={blog.id} href={"/projects/" + blog.id}>
             <a className={style.single}>
-              <h3>{project.name}</h3>
+              <h3>{blog.description}</h3>
             </a>
           </Link>
         ))}

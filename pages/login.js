@@ -22,6 +22,9 @@ const Login = () => {
     setPassword("");
     router.push("/");
   };
+  const handleLogOut = () => {
+    fire.auth().signOut();
+  };
   return (
     <div>
       <h1>Login</h1>
@@ -42,6 +45,7 @@ const Login = () => {
         />
         <br />
         <button type="submit">Login</button>
+        <button onClick={handleLogOut}>Logout</button>
       </form>
     </div>
   );
