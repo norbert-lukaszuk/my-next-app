@@ -5,7 +5,8 @@
 /.pnp
 .pnp.js
 # db keys
-serviceAcountKey.json
+serviceAccountKey.json
+config/fire-config.js
 # testing
 /coverage
 

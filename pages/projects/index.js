@@ -3,7 +3,8 @@ import Head from "next/head";
 import Image from "next/image";
 import style from "../../styles/Home.module.css";
 import Link from "next/link";
-
+import fire from "../../config/fire-config";
+import { useState, useEffect } from "react";
 export const getStaticProps = async () => {
   const resp = await fetch("https://jsonplaceholder.typicode.com/users");
   const data = await resp.json();
@@ -11,7 +12,20 @@ export const getStaticProps = async () => {
 };
 
 const Projects = ({ projects }) => {
-  console.log(projects);
+  const [blogs, setBlogs] = useState([]);
+  useEffect(() => {
+    fire
+      .firestore()
+      .collection("gitSnippets")
+      .onSnapshot((snap) => {
+        const blogs = snap.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setBlogs(blogs);
+      });
+  }, []);
+  console.log(blogs[0].description);
   return (
     <div>
       <Head>
