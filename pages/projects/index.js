@@ -25,7 +25,7 @@ const Projects = ({ projects }) => {
         setBlogs(blogs);
       });
   }, []);
-  console.log(blogs[0].description);
+  console.log(blogs);
   return (
     <div>
       <Head>
