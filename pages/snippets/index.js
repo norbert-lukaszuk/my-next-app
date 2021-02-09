@@ -12,11 +12,9 @@ const Snippets = ({ snippets }) => {
         <link rel="icon" href="/ic.png" />
         <meta name="keywords" content="code snippets" />
       </Head>
-      <h3>
-        {snippets.map((snip) => (
-          <p key={snip.id}>{snip.id}</p>
-        ))}
-      </h3>
+      {snippets.map((snip) => (
+        <h3 key={snip.id}>{snip.description}</h3>
+      ))}
     </div>
   );
 };
