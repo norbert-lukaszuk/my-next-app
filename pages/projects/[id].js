@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import db from "../../utils/db";
 export const getStaticPaths = async () => {
-  const snap = await db.collection("gitSnippets").get();
+  const snap = await db.collection("jsSnippets").get();
   const snippets = [];
   snap.forEach((doc) => {
     snippets.push({
@@ -14,11 +14,10 @@ export const getStaticPaths = async () => {
   return { paths: snippets, fallback: false };
 };
 export const getStaticProps = async (context) => {
-  const resp = await fetch(
-    `https://jsonplaceholder.typicode.com/users/${context.params.id}`
-  );
-  const data = await resp.json();
-  return { props: { projects: data } };
+  const snap = await db.collection("jsSnippets").doc(context.params.id).get();
+
+  const snippet = { id: snap.id, ...snap.data() };
+  return { props: { projects: snippet } };
 };
 const Project = ({ projects }) => {
   return (
@@ -27,9 +26,9 @@ const Project = ({ projects }) => {
         <title>Create electronics blog | Project</title>
         <link rel="icon" href="/ic.png" />
       </Head>
-      <h2>{projects.name}</h2>
-      <h2>{projects.username}</h2>
-      <h3>{projects.email}</h3>
+      <h2>{projects.id}</h2>
+      <h2>{projects.description}</h2>
+      <h3>{projects.code}</h3>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import Head from "next/head";
 import fire from "../../config/fire-config";
 import db from "../../utils/db";
 import { useEffect } from "react";
+import Link from "next/link";
 const Snippets = ({ snippets }) => {
   console.log(snippets);
   return (
@@ -13,7 +14,9 @@ const Snippets = ({ snippets }) => {
         <meta name="keywords" content="code snippets" />
       </Head>
       {snippets.map((snip) => (
-        <h3 key={snip.id}>{snip.description}</h3>
+        <Link key={snip.id} href={`/snippets/${snip.id}`}>
+          <h3>{snip.description}</h3>
+        </Link>
       ))}
     </div>
   );
@@ -21,11 +24,11 @@ const Snippets = ({ snippets }) => {
 
 export default Snippets;
 export const getStaticProps = async () => {
-  const snap = await db.collection("gitSnippets").get();
+  const snap = await db.collection("jsSnippets").get();
   const snippets = [];
   snap.forEach((doc) => {
     snippets.push({
-      id: doc.id,
+      id: doc.id.toString(),
       ...doc.data(),
     });
   });

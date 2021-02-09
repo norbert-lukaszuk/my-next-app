@@ -17,7 +17,7 @@ const Projects = ({ projects }) => {
   useEffect(() => {
     fire
       .firestore()
-      .collection("gitSnippets")
+      .collection("jsSnippets")
       .onSnapshot((snap) => {
         const blogs = snap.docs.map((doc) => ({
           id: doc.id,
