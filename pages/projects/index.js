@@ -21,21 +21,17 @@ export const getServerSideProps = async () => {
 };
 
 const Projects = ({ projects }) => {
-  // const [blogs, setBlogs] = useState([]);
-  // useEffect(() => {
-  //   fire
-  //     .firestore()
-  //     .collection("gitSnippets")
-  //     .onSnapshot((snap) => {
-  //       const blogs = snap.docs.map((doc) => ({
-  //         id: doc.id,
-  //         ...doc.data(),
-  //       }));
-  //       setBlogs(blogs);
-  //     });
-  // }, []);
-  // console.log(blogs);
-  console.log(projects);
+  const [list, setList] = useState([...projects]);
+  // ?? destructuring problem
+  const filterSnippets = (e) => {
+    const searchValue = e.target.value;
+    const currentList = [...list];
+    const matchingItems = currentList.filter((item) =>
+      item.startsWith(searchValue)
+    );
+    setList(matchingItems);
+  };
+  console.log(list);
   return (
     <div>
       <Head>
@@ -45,14 +41,15 @@ const Projects = ({ projects }) => {
       </Head>
       <main className={style.main}>
         <Image src="/ic_1.png" width={128} height={128} />
+        <input type="text" onChange={filterSnippets} />
         <h1>My projects</h1>
-        {projects.map((project) => (
+        {/* {list.map((project) => (
           <Link key={project.id} href={`/projects/${project.id}`}>
             <a className={style.single}>
               <h3>{project.description}</h3>
             </a>
           </Link>
-        ))}
+        ))} */}
       </main>
     </div>
   );
