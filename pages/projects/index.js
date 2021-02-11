@@ -22,6 +22,7 @@ export const getServerSideProps = async () => {
 
 const Projects = ({ projects }) => {
   const [list, setList] = useState([...projects]);
+  const [listToFilter, setListToFilter] = useState([...projects]);
   // ?? destructuring problem
   const filterSnippets = (e) => {
     const searchValue = e.target.value;
@@ -31,7 +32,7 @@ const Projects = ({ projects }) => {
       item.description.toString().startsWith(searchValue)
     );
 
-    setList(matchingItems);
+    setListToFilter(matchingItems);
     console.log(matchingItems);
   };
   console.log(list);
@@ -46,7 +47,7 @@ const Projects = ({ projects }) => {
         <Image src="/ic_1.png" width={128} height={128} />
         <input type="text" onChange={filterSnippets} />
         <h1>My projects</h1>
-        {list.map((project) => (
+        {listToFilter.map((project) => (
           <Link key={project.id} href={`/projects/${project.id}`}>
             <a className={style.single}>
               <h3>{project.description}</h3>
