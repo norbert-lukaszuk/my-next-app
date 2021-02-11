@@ -3,9 +3,15 @@ import Head from "next/head";
 import Image from "next/image";
 import style from "../../styles/Home.module.css";
 import Link from "next/link";
-// import fire from "../../config/fire-config";
 import { useState, useEffect } from "react";
-// import db from "../../utils/db";
+import {
+  Center,
+  color,
+  Input,
+  InputGroup,
+  InputLeftElement,
+} from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
 
 export const getServerSideProps = async () => {
   // ** fetch data using api/snippets
@@ -45,7 +51,20 @@ const Projects = ({ projects }) => {
       </Head>
       <main className={style.main}>
         <Image src="/ic_1.png" width={128} height={128} />
-        <input type="text" onChange={filterSnippets} />
+        <Center>
+          <InputGroup>
+            <InputLeftElement
+              pointerEvents="none"
+              children={<SearchIcon color="gray.300" />}
+            />
+            <Input
+              style={{ width: "60%" }}
+              placeholder="tap to filter"
+              variant="filled"
+              onChange={filterSnippets}
+            />
+          </InputGroup>
+        </Center>
         <h1>My projects</h1>
         {listToFilter.map((project) => (
           <Link key={project.id} href={`/projects/${project.id}`}>
