@@ -27,14 +27,8 @@ const Snippets = ({ snippets }) => {
 
 export default Snippets;
 export const getStaticProps = async () => {
-  // const snap = await db.collection("jsSnippets").get();
   const snap = await fetch("http://localhost:3000/api/snippets");
   const snippets = await snap.json();
-  // snap.forEach((doc) => {
-  //   snippets.push({
-  //     id: doc.id.toString(),
-  //     ...doc.data(),
-  //   });
-  // });
+
   return { props: { snippets } };
 };
