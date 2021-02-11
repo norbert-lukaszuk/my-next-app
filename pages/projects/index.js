@@ -27,9 +27,12 @@ const Projects = ({ projects }) => {
     const searchValue = e.target.value;
     const currentList = [...list];
     const matchingItems = currentList.filter((item) =>
-      item.startsWith(searchValue)
+      // ** toString() method is necessary to startWith() to work
+      item.description.toString().startsWith(searchValue)
     );
+
     setList(matchingItems);
+    console.log(matchingItems);
   };
   console.log(list);
   return (
@@ -43,13 +46,13 @@ const Projects = ({ projects }) => {
         <Image src="/ic_1.png" width={128} height={128} />
         <input type="text" onChange={filterSnippets} />
         <h1>My projects</h1>
-        {/* {list.map((project) => (
+        {list.map((project) => (
           <Link key={project.id} href={`/projects/${project.id}`}>
             <a className={style.single}>
               <h3>{project.description}</h3>
             </a>
           </Link>
-        ))} */}
+        ))}
       </main>
     </div>
   );
