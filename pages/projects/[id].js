@@ -1,22 +1,32 @@
 import React from "react";
 import Head from "next/head";
-import db from "../../utils/db";
+// import db from "../../utils/db";
 export const getStaticPaths = async () => {
-  const snap = await db.collection("jsSnippets").get();
-  const snippets = [];
-  snap.forEach((doc) => {
-    snippets.push({
-      params: { id: doc.id },
-    });
-  });
+  const resp = await fetch("http://localhost:3000/api/snippets");
+  const data = await resp.json();
+  // const snap = await db.collection("jsSnippets").get();
+  const snippets = data.map((snippet) => ({
+    params: { id: snippet.id },
+  }));
+  // const snippets = [];
+  // snap.forEach((doc) => {
+  //   snippets.push({
+  //     params: { id: doc.id },
+  //   });
+  // });
 
   console.log(snippets);
   return { paths: snippets, fallback: false };
 };
 export const getStaticProps = async (context) => {
-  const snap = await db.collection("jsSnippets").doc(context.params.id).get();
+  const resp = await fetch(
+    `http://localhost:3000/api/snippets/${context.params.id}`
+  );
+  const data = await resp.json();
+  const snippet = { ...data };
+  // const snap = await db.collection("jsSnippets").doc(context.params.id).get();
 
-  const snippet = { id: snap.id, ...snap.data() };
+  // const snippet = { id: snap.id, ...snap.data() };
   return { props: { projects: snippet } };
 };
 const Project = ({ projects }) => {

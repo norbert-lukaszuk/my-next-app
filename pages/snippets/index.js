@@ -1,6 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import { useEffect } from "react";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
 const Snippets = ({ snippets }) => {
