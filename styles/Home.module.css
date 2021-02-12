@@ -82,7 +82,12 @@
   line-height: 1.5;
   font-size: 1.5rem;
 }
-
+.navLink {
+  color: red;
+}
+.navLink:hover {
+  color: #0070f3;
+}
 .code {
   background: #fafafa;
   border-radius: 5px;
@@ -100,7 +105,13 @@
   max-width: 800px;
   margin-top: 3rem;
 }
-
+.Box {
+  font-size: 1.5rem;
+}
+.Box:hover {
+  color: #0070f3;
+  border-color: #0070f3;
+}
 .card {
   margin: 1rem;
   flex-basis: 45%;

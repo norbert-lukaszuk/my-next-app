@@ -5,8 +5,13 @@ import style from "../../styles/Home.module.css";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import {
+  Badge,
+  Box,
   Center,
   color,
+  Container,
+  Flex,
+  Grid,
   Input,
   InputGroup,
   InputLeftElement,
@@ -43,7 +48,7 @@ const Projects = ({ projects }) => {
   };
   console.log(list);
   return (
-    <div>
+    <Center>
       <Head>
         <title>Create electronics blog | Projects</title>
         <link rel="icon" href="/ic.png" />
@@ -51,30 +56,44 @@ const Projects = ({ projects }) => {
       </Head>
       <main className={style.main}>
         <Image src="/ic_1.png" width={128} height={128} />
-        <Center>
-          <InputGroup>
-            <InputLeftElement
-              pointerEvents="none"
-              children={<SearchIcon color="gray.300" />}
-            />
-            <Input
-              style={{ width: "60%" }}
-              placeholder="tap to filter"
-              variant="filled"
-              onChange={filterSnippets}
-            />
-          </InputGroup>
-        </Center>
-        <h1>My projects</h1>
-        {listToFilter.map((project) => (
-          <Link key={project.id} href={`/projects/${project.id}`}>
-            <a className={style.single}>
-              <h3>{project.description}</h3>
-            </a>
-          </Link>
-        ))}
+        <InputGroup width="60%">
+          <InputLeftElement
+            pointerEvents="none"
+            children={<SearchIcon color="gray.300" />}
+          />
+          <Input
+            placeholder="tap to filter"
+            variant="filled"
+            onChange={filterSnippets}
+          />
+        </InputGroup>
+        <Container centerContent="true">
+          <h1>Snippets</h1>
+        </Container>
+        <Grid templateColumns="repeat(2, 1fr)" gridGap="10px">
+          {listToFilter.map((project) => (
+            <Box
+              p="6"
+              maxW="sm"
+              borderWidth="1px"
+              borderRadius="lg"
+              overflow="hidden"
+              className={style.Box}
+              bg="gray.100"
+            >
+              <Badge colorScheme="purple" variant="solid">
+                GIT
+              </Badge>
+              <Link key={project.id} href={`/projects/${project.id}`}>
+                <a>
+                  <h3>{project.description}</h3>
+                </a>
+              </Link>
+            </Box>
+          ))}
+        </Grid>
       </main>
-    </div>
+    </Center>
   );
 };
 
