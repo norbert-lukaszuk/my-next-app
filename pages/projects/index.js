@@ -8,9 +8,7 @@ import {
   Badge,
   Box,
   Center,
-  color,
   Container,
-  Flex,
   Grid,
   Input,
   InputGroup,
@@ -40,7 +38,7 @@ const Projects = ({ projects }) => {
     const currentList = [...list];
     const matchingItems = currentList.filter((item) =>
       // ** toString() method is necessary to startWith() to work
-      item.description.toString().startsWith(searchValue)
+      item.code.toString().startsWith(searchValue)
     );
 
     setListToFilter(matchingItems);
@@ -73,6 +71,7 @@ const Projects = ({ projects }) => {
         <Grid templateColumns="repeat(2, 1fr)" gridGap="10px">
           {listToFilter.map((project) => (
             <Box
+              key={project.id}
               p="6"
               maxW="sm"
               borderWidth="1px"
@@ -82,13 +81,28 @@ const Projects = ({ projects }) => {
               bg="gray.100"
             >
               <Badge colorScheme="purple" variant="solid">
-                GIT
+                {project.lang}
               </Badge>
-              <Link key={project.id} href={`/projects/${project.id}`}>
+              <Link href={`/projects/${project.id}`}>
                 <a>
-                  <h3>{project.description}</h3>
+                  <h3>{`${project.code.slice(0, 40)} ...`}</h3>
                 </a>
               </Link>
+              {project.tags.map((tag) => (
+                <Badge
+                  colorScheme="yellow"
+                  variant="outline"
+                  m="1"
+                  key={tag}
+                  sx={{
+                    "@media (max-width: 360px)": {
+                      display: "none",
+                    },
+                  }}
+                >
+                  {tag}
+                </Badge>
+              ))}
             </Box>
           ))}
         </Grid>

@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-// import db from "../../utils/db";
+import { Box, Code } from "@chakra-ui/react";
 export const getStaticPaths = async () => {
   const resp = await fetch("http://localhost:3000/api/snippets");
   const data = await resp.json();
@@ -31,15 +31,15 @@ export const getStaticProps = async (context) => {
 };
 const Project = ({ projects }) => {
   return (
-    <div>
+    <>
       <Head>
         <title>Create electronics blog | Project</title>
         <link rel="icon" href="/ic.png" />
       </Head>
-      <h2>{projects.id}</h2>
-      <h2>{projects.description}</h2>
-      <h3>{projects.code}</h3>
-    </div>
+      <Box m="15px" bg="gray.100" p={10}>
+        <Code colorScheme="cyan" children={projects.code} p="5px"></Code>
+      </Box>
+    </>
   );
 };
 

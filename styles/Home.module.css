@@ -152,4 +152,9 @@
     width: 100%;
     flex-direction: column;
   }
+  .hashtags {
+    display: none;
+  }
+}
+@media (max-width: 360px) {
 }
