@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import {
   Badge,
   Box,
+  Button,
   Center,
   Container,
   Flex,
@@ -35,7 +36,17 @@ export const getServerSideProps = async () => {
 const Projects = ({ projects }) => {
   const [list, setList] = useState([...projects]);
   const [listToFilter, setListToFilter] = useState([...projects]);
-  // ?? destructuring problem
+  const clickOnTag = (e) => {
+    const searchValue = e.target.innerText;
+    const currentList = [...list];
+    const matchingItems = currentList.filter((item) =>
+      // ** toString() method is necessary to startWith() to work
+      item.code.toString().startsWith(searchValue)
+    );
+    setListToFilter(matchingItems);
+
+    console.log(searchValue);
+  };
   const filterSnippets = (e) => {
     const searchValue = e.target.value;
     const currentList = [...list];
@@ -61,9 +72,12 @@ const Projects = ({ projects }) => {
           <HStack>
             {/* <IconButton icon={<AddIcon />} /> */}
             {/* <IconButton icon={<SearchIcon />} /> */}
-            <span className={style.filterBox}>Add</span>
-            <span className={style.filterBox}>JavaScript</span>
-            <span className={style.filterBox}>CSS</span>
+            <Button variant="ghost">Add</Button>
+            <Button variant="ghost">JavaScript</Button>
+            <Button variant="ghost">CSS</Button>
+            <Button variant="ghost" onClick={clickOnTag}>
+              /*
+            </Button>
           </HStack>
         </Flex>
         <Box
