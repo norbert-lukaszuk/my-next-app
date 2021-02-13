@@ -36,12 +36,13 @@ export const getServerSideProps = async () => {
 const Projects = ({ projects }) => {
   const [list, setList] = useState([...projects]);
   const [listToFilter, setListToFilter] = useState([...projects]);
+  // ** click on tag to filter by lang
   const clickOnTag = (e) => {
     const searchValue = e.target.innerText;
     const currentList = [...list];
     const matchingItems = currentList.filter((item) =>
       // ** toString() method is necessary to startWith() to work
-      item.code.toString().startsWith(searchValue)
+      item.lang.toString().startsWith(searchValue)
     );
     setListToFilter(matchingItems);
 
@@ -73,8 +74,12 @@ const Projects = ({ projects }) => {
             {/* <IconButton icon={<AddIcon />} /> */}
             {/* <IconButton icon={<SearchIcon />} /> */}
             <Button variant="ghost">Add</Button>
-            <Button variant="ghost">JavaScript</Button>
-            <Button variant="ghost">CSS</Button>
+            <Button variant="ghost" onClick={clickOnTag}>
+              JavaScript
+            </Button>
+            <Button variant="ghost" onClick={clickOnTag}>
+              CSS
+            </Button>
             <Button variant="ghost" onClick={clickOnTag}>
               /*
             </Button>
