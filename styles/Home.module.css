@@ -22,6 +22,14 @@
 .single:hover {
   border-left: 8px solid #4979ff;
 }
+.filterBox {
+  border-bottom: transparent 3px solid;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.filterBox:hover {
+  border-bottom: black 3px solid;
+}
 .projects {
   display: flex;
   justify-content: flex-start;

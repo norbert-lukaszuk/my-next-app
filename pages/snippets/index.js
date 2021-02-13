@@ -9,7 +9,9 @@ import {
   Box,
   Center,
   Container,
+  Flex,
   Grid,
+  HStack,
   IconButton,
   Input,
   InputGroup,
@@ -54,21 +56,26 @@ const Projects = ({ projects }) => {
         <meta name="keywords" content="elctronics projects" />
       </Head>
       <main className={style.main}>
-        <Image src="/ic_1.png" width={128} height={128} />
+        {/* <Image src="/ic_1.png" width={64} height={64} /> */}
+        <Flex justify="flex-start" align="start" width="90vw">
+          <HStack>
+            {/* <IconButton icon={<AddIcon />} /> */}
+            {/* <IconButton icon={<SearchIcon />} /> */}
+            <span className={style.filterBox}>Add</span>
+            <span className={style.filterBox}>JavaScript</span>
+            <span className={style.filterBox}>CSS</span>
+          </HStack>
+        </Flex>
         <Box
           as="h1"
-          fontSize="x-large"
-          borderWidth="2px"
-          borderColor="gray.300"
+          fontSize="2rem"
           borderRadius="lg"
-          p="10px"
-          m="10px"
-          bgColor="pink.100"
+          // p="10px"
+          marginBottom="40px"
           color="gray.600"
         >
           Snippets
         </Box>
-        <IconButton icon={<AddIcon />} />
         <InputGroup width="60%" m="10px">
           <InputLeftElement
             pointerEvents="none"

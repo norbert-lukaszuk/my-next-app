@@ -5,7 +5,7 @@ import style from "../styles/Home.module.css";
 const Navbar = () => {
   return (
     <div>
-      <Image src="/ic_1.png" width={50} height={50} />
+      {/* <Image src="/ic_1.png" width={50} height={50} /> */}
       <nav>
         <Link href="/" className={style.navLink}>
           <a>Home</a>
