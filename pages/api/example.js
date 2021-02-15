@@ -7,21 +7,44 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-let num = new Array();
-db.collection("data")
-  .doc("codeNotes")
-  .listCollections()
-  .then((resp) => resp.map((coll) => coll._queryOptions.collectionId))
-  .then((arr) =>
-    arr.forEach((doc) =>
-      db
-        .collection(`data/codeNotes/${doc}`)
-        .get()
-        .then((resp) =>
-          resp.docs.forEach((snipp) => console.log(snipp.data().lang))
-        )
-    )
-  );
+
+async function getData() {
+  const myData = await db
+    .collection("data")
+    .doc("codeNotes")
+    .listCollections()
+    .then((resp) => {
+      resp.forEach((item) => {
+        const singleCollection = `data/codeNotes/${item._queryOptions.collectionId}`;
+        db.collection(singleCollection)
+          .get()
+          .then((collection) => [...collection.docs]);
+        return item;
+      });
+      // resp.map((coll) => coll._queryOptions.collectionId);
+      return resp;
+    });
+  console.log(myData);
+
+  //   .then((arr) =>
+  //     arr.forEach((doc) =>
+  //       db
+  //         .collection(`data/codeNotes/${doc}`)
+  //         .get()
+  //         .then((resp) =>
+  //           resp.docs.forEach((snipp) => {
+  //             // console.log(snipp.data().lang);
+  //             arr.push({ ...snipp.data() });
+  //             console.log(arr);
+  //           })
+  //         )
+  //     )
+  //   );
+  // return myData;
+}
+
+getData();
+
 // async function getData() {
 //   try {
 //     const collections = await db

@@ -1,28 +1,26 @@
 import db from "../../../utils/db";
 export default async function handler(req, res) {
-  const collections = await db
+  const myData = await db
     .collection("data")
     .doc("codeNotes")
-    .listCollections();
-
-  const collectionId = collections.map(
-    (collection) => collection._queryOptions.collectionId
-  );
-  const getAllCollections = async () => {
-     collectionId.forEach((doc) => {
-     let arr = 
-     await db.collection(doc)
-        .get()
-        .then((singleCollection) => arr.push(singleCollection));
+    .listCollections()
+    .then((resp) => {
+      resp.forEach((item) => {
+        const singleCollection = `data/codeNotes/${item._queryOptions.collectionId}`;
+        db.collection(singleCollection)
+          .get()
+          .then((collection) => collection.forEach((doc) => [...doc.data()]));
+        // .then((collection) => {
+        //   collection.forEach((docs) => {
+        //     return { id: docs.id };
+        //   });
+        //   return collection;
+        // });
+        return item;
+      });
+      // resp.map((coll) => coll._queryOptions.collectionId);
+      return resp;
     });
-    return arr;
-  };
-  const allColletions = getAllCollections();
-  // const snap = await db.collection("data/codeNotes/CSS").get();
-
-  // const snippets = snap.docs.map((snap) => ({
-  //   id: snap.id,
-  //   ...snap.data(),
-  // }));
-  res.status(200).json(allColletions);
+  // console.log(myData);
+  res.status(200).json(myData);
 }
