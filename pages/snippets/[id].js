@@ -1,15 +1,14 @@
 import React from "react";
 import Head from "next/head";
 import { Box, Code } from "@chakra-ui/react";
+
 export const getStaticPaths = async () => {
   const resp = await fetch("http://localhost:3000/api/snippets");
   const data = await resp.json();
-  // const snap = await db.collection("jsSnippets").get();
   const snippets = data.map((snippet) => ({
     params: { id: snippet.id },
   }));
 
-  console.log(snippets);
   return { paths: snippets, fallback: false };
 };
 export const getStaticProps = async (context) => {
@@ -18,11 +17,11 @@ export const getStaticProps = async (context) => {
   );
 
   const data = await resp.json();
-  console.log(data);
 
-  return { props: { projects: { ...data } } };
+  return { props: { snippet: { ...data } } };
 };
-const Project = ({ projects }) => {
+const Project = ({ snippet }) => {
+  console.log(snippet);
   return (
     <>
       <Head>
@@ -30,8 +29,8 @@ const Project = ({ projects }) => {
         <link rel="icon" href="/ic.png" />
       </Head>
       <Box m="15px" bg="gray.100" p={10}>
-        <Code colorScheme="pink" children={projects.id} p="5px"></Code>
-        <Code colorScheme="cyan" children={projects.code} p="5px"></Code>
+        <Code colorScheme="pink" children={snippet.id} p="5px"></Code>
+        <Code colorScheme="cyan" children={snippet.code} p="5px"></Code>
       </Box>
     </>
   );
