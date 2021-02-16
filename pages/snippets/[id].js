@@ -15,13 +15,12 @@ export const getStaticProps = async (context) => {
   const resp = await fetch(
     `http://localhost:3000/api/snippets/${context.params.id}`
   );
-
+  const created = resp.created.toDate();
   const data = await resp.json();
-
   return { props: { snippet: { ...data } } };
 };
 const Project = ({ snippet }) => {
-  console.log(snippet);
+  console.log(snippet.created);
   return (
     <>
       <Head>
@@ -29,7 +28,7 @@ const Project = ({ snippet }) => {
         <link rel="icon" href="/ic.png" />
       </Head>
       <Box m="15px" bg="gray.100" p={10}>
-        <Code colorScheme="pink" children={snippet.id} p="5px"></Code>
+        <Code colorScheme="pink" children={snippet.lang} p="5px"></Code>
         <Code colorScheme="cyan" children={snippet.code} p="5px"></Code>
       </Box>
     </>

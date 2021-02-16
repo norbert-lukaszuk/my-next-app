@@ -129,7 +129,7 @@ const Snippets = ({ snippets }) => {
               </Badge>
               <Link href={`/snippets/${project.id}`}>
                 <a>
-                  <h3>{`${project.code.slice(0, 40)} ...`}</h3>
+                  <h3>{`${project.description.slice(0, 40)} ...`}</h3>
                 </a>
               </Link>
               {project.tags.map((tag) => (
