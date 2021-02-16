@@ -8,12 +8,6 @@ export const getStaticPaths = async () => {
   const snippets = data.map((snippet) => ({
     params: { id: snippet.id },
   }));
-  // const snippets = [];
-  // snap.forEach((doc) => {
-  //   snippets.push({
-  //     params: { id: doc.id },
-  //   });
-  // });
 
   console.log(snippets);
   return { paths: snippets, fallback: false };
@@ -22,12 +16,14 @@ export const getStaticProps = async (context) => {
   const resp = await fetch(
     `http://localhost:3000/api/snippets/${context.params.id}`
   );
+
   const data = await resp.json();
-  const snippet = { ...data };
+  console.log(data);
   // const snap = await db.collection("jsSnippets").doc(context.params.id).get();
 
   // const snippet = { id: snap.id, ...snap.data() };
-  return { props: { projects: snippet } };
+  // return { props: { projects: snippet } };
+  return { props: { projects: { ...data } } };
 };
 const Project = ({ projects }) => {
   return (
@@ -37,6 +33,7 @@ const Project = ({ projects }) => {
         <link rel="icon" href="/ic.png" />
       </Head>
       <Box m="15px" bg="gray.100" p={10}>
+        <Code colorScheme="pink" children={projects.id} p="5px"></Code>
         <Code colorScheme="cyan" children={projects.code} p="5px"></Code>
       </Box>
     </>
