@@ -8,6 +8,19 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
+async function putData() {
+  const data = {
+    code: "nav a{color: #0070f3}",
+    created: new Date(),
+    description: "Child selector",
+    lang: "CSS",
+    tags: ["selector", "child"],
+  };
+  await db
+    .collection("snippets")
+    .add(data)
+    .catch((err) => console.log(err));
+}
 async function getData() {
   const myData = await db
     .collection("data")
@@ -43,8 +56,8 @@ async function getData() {
   // return myData;
 }
 
-getData();
-
+// getData();
+putData();
 // async function getData() {
 //   try {
 //     const collections = await db
