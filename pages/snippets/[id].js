@@ -19,10 +19,7 @@ export const getStaticProps = async (context) => {
 
   const data = await resp.json();
   console.log(data);
-  // const snap = await db.collection("jsSnippets").doc(context.params.id).get();
 
-  // const snippet = { id: snap.id, ...snap.data() };
-  // return { props: { projects: snippet } };
   return { props: { projects: { ...data } } };
 };
 const Project = ({ projects }) => {
