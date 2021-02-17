@@ -53,18 +53,22 @@ const Snippets = ({ snippets }) => {
 
     console.log(searchValue);
   };
+  // ** Filter snippets with input value
   const filterSnippets = (e) => {
     const searchValue = e.target.value;
     const currentList = [...list];
     const matchingItems = currentList.filter((item) =>
       // ** toString() method is necessary to startWith() to work
-      item.code.toString().startsWith(searchValue)
+      item.description.toString().startsWith(searchValue)
     );
 
     setListToFilter(matchingItems);
     console.log(matchingItems);
   };
   console.log(list);
+  const showAllLanguages = () => {
+    setListToFilter([...snippets]);
+  };
   return (
     <Center>
       <Head>
@@ -73,12 +77,12 @@ const Snippets = ({ snippets }) => {
         <meta name="keywords" content="elctronics snippets" />
       </Head>
       <main className={style.main}>
-        {/* <Image src="/ic_1.png" width={64} height={64} /> */}
+        <Image src="/ic_1.png" width={64} height={64} />
         <Flex justify="flex-start" align="start" width="90vw">
           <HStack>
-            {/* <IconButton icon={<AddIcon />} /> */}
-            {/* <IconButton icon={<SearchIcon />} /> */}
-            <Button variant="ghost">Add</Button>
+            <Button variant="ghost" onClick={showAllLanguages}>
+              All
+            </Button>
             <Button variant="ghost" onClick={clickOnTag}>
               JavaScript
             </Button>
@@ -86,7 +90,10 @@ const Snippets = ({ snippets }) => {
               CSS
             </Button>
             <Button variant="ghost" onClick={clickOnTag}>
-              /*
+              React
+            </Button>
+            <Button variant="ghost" onClick={clickOnTag}>
+              Git
             </Button>
           </HStack>
         </Flex>
@@ -113,9 +120,9 @@ const Snippets = ({ snippets }) => {
         </InputGroup>
         <Container centerContent="true"></Container>
         <Grid templateColumns="repeat(2, 1fr)" gridGap="10px">
-          {listToFilter.map((project) => (
+          {listToFilter.map((snippet) => (
             <Box
-              key={project.id}
+              key={snippet.id}
               p="6"
               maxW="sm"
               borderWidth="1px"
@@ -125,14 +132,14 @@ const Snippets = ({ snippets }) => {
               bg="gray.100"
             >
               <Badge colorScheme="purple" variant="solid">
-                {project.lang}
+                {snippet.lang}
               </Badge>
-              <Link href={`/snippets/${project.id}`}>
+              <Link href={`/snippets/${snippet.id}`}>
                 <a>
-                  <h3>{`${project.description.slice(0, 40)} ...`}</h3>
+                  <h3>{`${snippet.description.slice(0, 40)} ...`}</h3>
                 </a>
               </Link>
-              {project.tags.map((tag) => (
+              {snippet.tags.map((tag) => (
                 <Badge
                   colorScheme="yellow"
                   variant="outline"
