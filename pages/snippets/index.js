@@ -17,6 +17,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  SimpleGrid,
   Tag,
   TagLeftIcon,
 } from "@chakra-ui/react";
@@ -141,8 +142,8 @@ const Snippets = ({ snippets }) => {
             value={searchInput}
           />
         </InputGroup>
-        <Container centerContent="true"></Container>
-        <Grid templateColumns="repeat(2, 1fr)" gridGap="10px">
+        {/* <Container centerContent="true"></Container> */}
+        <SimpleGrid columns={2} spacing="10px" minChildWidth="320px">
           {listToFilter.map((snippet) => (
             <Box
               key={snippet.id}
@@ -182,7 +183,7 @@ const Snippets = ({ snippets }) => {
               ))}
             </Box>
           ))}
-        </Grid>
+        </SimpleGrid>
       </main>
     </Center>
   );
