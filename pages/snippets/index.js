@@ -17,6 +17,8 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  Tag,
+  TagLeftIcon,
 } from "@chakra-ui/react";
 import { AddIcon, SearchIcon } from "@chakra-ui/icons";
 
@@ -41,6 +43,9 @@ export const getServerSideProps = async () => {
 const Snippets = ({ snippets }) => {
   const [list, setList] = useState([...snippets]);
   const [listToFilter, setListToFilter] = useState([...snippets]);
+  const [searchInput, setSearchInput] = useState("");
+  console.log(list);
+
   // ** click on tag to filter by lang
   const clickOnTag = (e) => {
     const searchValue = e.target.innerText;
@@ -53,19 +58,36 @@ const Snippets = ({ snippets }) => {
 
     console.log(searchValue);
   };
+  // ** clicking on snippet tags filter list out
+  const clikOnSnippetTag = (e) => {
+    // gets tag text excl # tag
+    const searchedTag = e.target.innerText.slice(1);
+    const currentList = [...list];
+    // ** filter list on base what is in the tag
+    const showList = currentList.filter((item) =>
+      // check if tags array includes clicked #tag
+      item.tags.includes(searchedTag)
+    );
+    setListToFilter(showList);
+    /* const showList = currentList.map((item) =>
+      item.tags.includes(searchedTag) ? item : null
+    ); */
+    console.log(showList);
+  };
   // ** Filter snippets with input value
   const filterSnippets = (e) => {
-    const searchValue = e.target.value;
+    // const searchValue = e.target.value;
+    setSearchInput(e.target.value);
     const currentList = [...list];
     const matchingItems = currentList.filter((item) =>
       // ** toString() method is necessary to startWith() to work
-      item.description.toString().startsWith(searchValue)
+      item.description.toString().startsWith(searchInput)
     );
 
     setListToFilter(matchingItems);
-    console.log(matchingItems);
+    // console.log(matchingItems);
   };
-  console.log(list);
+  // console.log(list);
   const showAllLanguages = () => {
     setListToFilter([...snippets]);
   };
@@ -116,6 +138,7 @@ const Snippets = ({ snippets }) => {
             placeholder="tap to filter"
             variant="filled"
             onChange={filterSnippets}
+            value={searchInput}
           />
         </InputGroup>
         <Container centerContent="true"></Container>
@@ -140,9 +163,11 @@ const Snippets = ({ snippets }) => {
                 </a>
               </Link>
               {snippet.tags.map((tag) => (
-                <Badge
+                <Tag
+                  onClick={clikOnSnippetTag}
                   colorScheme="yellow"
                   variant="outline"
+                  size="sm"
                   m="1"
                   key={tag}
                   sx={{
@@ -151,8 +176,8 @@ const Snippets = ({ snippets }) => {
                     },
                   }}
                 >
-                  {tag}
-                </Badge>
+                  {`#${tag}`}
+                </Tag>
               ))}
             </Box>
           ))}
