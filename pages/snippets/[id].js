@@ -1,35 +1,26 @@
 import React from "react";
 import Head from "next/head";
 import { Box, Code } from "@chakra-ui/react";
+
 export const getStaticPaths = async () => {
   const resp = await fetch("http://localhost:3000/api/snippets");
   const data = await resp.json();
-  // const snap = await db.collection("jsSnippets").get();
   const snippets = data.map((snippet) => ({
     params: { id: snippet.id },
   }));
-  // const snippets = [];
-  // snap.forEach((doc) => {
-  //   snippets.push({
-  //     params: { id: doc.id },
-  //   });
-  // });
 
-  console.log(snippets);
   return { paths: snippets, fallback: false };
 };
 export const getStaticProps = async (context) => {
   const resp = await fetch(
     `http://localhost:3000/api/snippets/${context.params.id}`
   );
+  // const created = resp.created.toDate();
   const data = await resp.json();
-  const snippet = { ...data };
-  // const snap = await db.collection("jsSnippets").doc(context.params.id).get();
-
-  // const snippet = { id: snap.id, ...snap.data() };
-  return { props: { projects: snippet } };
+  return { props: { snippet: { ...data } } };
 };
-const Project = ({ projects }) => {
+const Project = ({ snippet }) => {
+  console.log(new Date(snippet.date).toISOString().slice(0, 10));
   return (
     <>
       <Head>
@@ -37,7 +28,13 @@ const Project = ({ projects }) => {
         <link rel="icon" href="/ic.png" />
       </Head>
       <Box m="15px" bg="gray.100" p={10}>
-        <Code colorScheme="cyan" children={projects.code} p="5px"></Code>
+        <Code
+          colorScheme="teal"
+          children={new Date(snippet.date).toISOString().slice(0, 10)}
+          p="5px"
+        ></Code>
+        <Code colorScheme="pink" children={snippet.lang} p="5px"></Code>
+        <Code colorScheme="cyan" children={snippet.code} p="5px"></Code>
       </Box>
     </>
   );

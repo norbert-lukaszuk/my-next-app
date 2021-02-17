@@ -30,12 +30,17 @@ export const getServerSideProps = async () => {
   // id: snap.id,
   // ...snap.data(),
   // }));
-  return { props: { projects: data } };
+  return {
+    props: {
+      snippets: data,
+      /* snippets: data */
+    },
+  };
 };
 
-const Projects = ({ projects }) => {
-  const [list, setList] = useState([...projects]);
-  const [listToFilter, setListToFilter] = useState([...projects]);
+const Snippets = ({ snippets }) => {
+  const [list, setList] = useState([...snippets]);
+  const [listToFilter, setListToFilter] = useState([...snippets]);
   // ** click on tag to filter by lang
   const clickOnTag = (e) => {
     const searchValue = e.target.innerText;
@@ -65,7 +70,7 @@ const Projects = ({ projects }) => {
       <Head>
         <title>Create electronics blog | Projects</title>
         <link rel="icon" href="/ic.png" />
-        <meta name="keywords" content="elctronics projects" />
+        <meta name="keywords" content="elctronics snippets" />
       </Head>
       <main className={style.main}>
         {/* <Image src="/ic_1.png" width={64} height={64} /> */}
@@ -124,7 +129,7 @@ const Projects = ({ projects }) => {
               </Badge>
               <Link href={`/snippets/${project.id}`}>
                 <a>
-                  <h3>{`${project.code.slice(0, 40)} ...`}</h3>
+                  <h3>{`${project.description.slice(0, 40)} ...`}</h3>
                 </a>
               </Link>
               {project.tags.map((tag) => (
@@ -150,4 +155,4 @@ const Projects = ({ projects }) => {
   );
 };
 
-export default Projects;
+export default Snippets;
