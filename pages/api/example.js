@@ -10,11 +10,12 @@ const db = admin.firestore();
 
 async function putData() {
   const data = {
-    code: "nav a{color: #0070f3}",
+    code:
+      "/*exporting module from user.js file*/exports.getNane = getName /*import module in second file*/ const user = require('./user'); /*using module*/ const name = user.getName()",
     created: new Date(),
-    description: "Child selector",
-    lang: "CSS",
-    tags: ["selector", "child"],
+    description: "Import and export module in node.js",
+    lang: "node",
+    tags: ["import", "export", "module"],
   };
   await db
     .collection("snippets")

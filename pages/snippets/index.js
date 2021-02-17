@@ -143,7 +143,7 @@ const Snippets = ({ snippets }) => {
           />
         </InputGroup>
         {/* <Container centerContent="true"></Container> */}
-        <SimpleGrid columns={2} spacing="10px" minChildWidth="320px">
+        <SimpleGrid columns={2} spacing="10px" minChildWidth="360px">
           {listToFilter.map((snippet) => (
             <Box
               key={snippet.id}

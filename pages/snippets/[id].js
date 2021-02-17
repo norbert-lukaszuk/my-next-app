@@ -1,6 +1,8 @@
 import React from "react";
+import { useEffect } from "react";
 import Head from "next/head";
-import { Box, Code } from "@chakra-ui/react";
+import { Box, Code, Container } from "@chakra-ui/react";
+import Prism from "prismjs";
 
 export const getStaticPaths = async () => {
   const resp = await fetch("http://localhost:3000/api/snippets");
@@ -21,21 +23,29 @@ export const getStaticProps = async (context) => {
 };
 const Project = ({ snippet }) => {
   console.log(new Date(snippet.date).toISOString().slice(0, 10));
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
   return (
     <>
       <Head>
         <title>Create electronics blog | Project</title>
         <link rel="icon" href="/ic.png" />
       </Head>
-      <Box m="15px" bg="gray.100" p={10}>
-        <Code
-          colorScheme="teal"
-          children={new Date(snippet.date).toISOString().slice(0, 10)}
-          p="5px"
-        ></Code>
-        <Code colorScheme="pink" children={snippet.lang} p="5px"></Code>
-        <Code colorScheme="cyan" children={snippet.code} p="5px"></Code>
-      </Box>
+      {/* <Box m="15px" bg="gray.100" p={10}>
+          <Code
+            colorScheme="teal"
+            children={new Date(snippet.date).toISOString().slice(0, 10)}
+            p="5px"
+          ></Code>
+          <Code colorScheme="pink" children={snippet.lang} p="5px"></Code>
+          <Code colorScheme="cyan" children={snippet.code} p="5px"></Code>
+        </Box> */}
+      <pre>
+        <code className={`language-${snippet.lang.toLowerCase()}`}>
+          <p> {snippet.code}</p>
+        </code>
+      </pre>
     </>
   );
 };
