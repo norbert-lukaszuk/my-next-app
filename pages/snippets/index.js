@@ -174,6 +174,7 @@ const Snippets = ({ snippets }) => {
                     "@media (max-width: 360px)": {
                       display: "none",
                     },
+                    cursor: "pointer",
                   }}
                 >
                   {`#${tag}`}
