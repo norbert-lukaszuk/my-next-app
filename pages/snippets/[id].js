@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import Head from "next/head";
 import { Box, Code, Container } from "@chakra-ui/react";
 import Prism from "prismjs";
+import "prismjs/plugins/line-numbers/prism-line-numbers";
+import "../../node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css";
 
 export const getStaticPaths = async () => {
   const resp = await fetch("http://localhost:3000/api/snippets");
@@ -41,7 +43,7 @@ const Project = ({ snippet }) => {
           <Code colorScheme="pink" children={snippet.lang} p="5px"></Code>
           <Code colorScheme="cyan" children={snippet.code} p="5px"></Code>
         </Box> */}
-      <pre>
+      <pre className="line-numbers">
         <code className={`language-${snippet.lang.toLowerCase()}`}>
           <p> {snippet.code}</p>
         </code>
