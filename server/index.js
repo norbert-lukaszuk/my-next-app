@@ -16,9 +16,9 @@ const getNames = () => {
   }
   return arr;
 };
-const names = getNames();
-app.get("/", (req, res) => {
-  res.json({ massage: names });
+const users = getNames();
+app.get("/users", (req, res) => {
+  res.json({ users: users });
 });
 
 app.listen(PORT, () => {
