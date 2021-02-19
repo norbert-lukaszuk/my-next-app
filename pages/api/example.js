@@ -10,12 +10,13 @@ const db = admin.firestore();
 
 async function putData() {
   const data = {
-    code:
-      "/*exporting module from user.js file*/exports.getNane = getName /*import module in second file*/ const user = require('./user'); /*using module*/ const name = user.getName()",
+    code: `const all = arr.reduce((acc,item)=>{
+      return acc+" "+item
+  },'')`,
     created: new Date(),
-    description: "Import and export module in node.js",
-    lang: "node",
-    tags: ["import", "export", "module"],
+    description: "Raduce method for array",
+    lang: "JavaScript",
+    tags: ["reduce", "method", "array"],
   };
   await db
     .collection("snippets")
@@ -39,48 +40,5 @@ async function getData() {
       return resp;
     });
   console.log(myData);
-
-  //   .then((arr) =>
-  //     arr.forEach((doc) =>
-  //       db
-  //         .collection(`data/codeNotes/${doc}`)
-  //         .get()
-  //         .then((resp) =>
-  //           resp.docs.forEach((snipp) => {
-  //             // console.log(snipp.data().lang);
-  //             arr.push({ ...snipp.data() });
-  //             console.log(arr);
-  //           })
-  //         )
-  //     )
-  //   );
-  // return myData;
 }
-
-// getData();
 putData();
-// async function getData() {
-//   try {
-//     const collections = await db
-//       .collection("data")
-//       .doc("codeNotes")
-//       .listCollections();
-
-//     const docs = collections.map((doc) => doc._queryOptions.collectionId);
-//     return docs;
-//   } catch (err) {
-//     console.log(err);
-//   }
-//   return docs;
-// }
-/* async function getDocs() {
-  try {
-    const allDocs = await docs.forEach(async function (doc) {
-      const snipp = await db.collection(`data/codeNotes/${doc}`).get();
-      // console.log(snipp.docs);
-      return snipp;
-    });
-  } catch (err) {
-    console.log(err);
-  }
-} */
