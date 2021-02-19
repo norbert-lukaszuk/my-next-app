@@ -11,14 +11,14 @@ const getNames = () => {
       name: chance.first(),
       lastName: chance.last(),
       age: chance.age(),
-      categorie: chance.letter({ casing: "upper" }),
+      id: chance.cf(),
     });
   }
   return arr;
 };
 const users = getNames();
 app.get("/users", (req, res) => {
-  res.json({ users: users });
+  res.json({ users });
 });
 
 app.listen(PORT, () => {
