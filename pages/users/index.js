@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 
 export const getStaticProps = async () => {
-  const resp = await fetch("http://localhost:3001/users");
+  const resp = await fetch("http://localhost:3000/api/users");
   const data = await resp.json();
   console.log(data);
   return {
